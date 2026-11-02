@@ -2,6 +2,14 @@
 
 (English | [中文](README_zh.md) | [日本語](README_ja.md))
 
+## 我的修改
+
+修复摄像头无法上传，只改了文件main/boards/common/esp32_camera.cc中Explain() 的上传部分：
+- 删掉了分块写入的逻辑，包括 write_or_fail、drain_jpeg_queue 和 Transfer-Encoding 头。
+- 先在内存里拼好 multipart 请求体，用 SetContent() 一次发出，不再把图片分多次写入。
+
+gpio19和gpio20可用来jtag，但是面包版用来驱动显示，设置了编译开关
+
 ## Introduction
 
 👉 [Human: Give AI a camera vs AI: Instantly finds out the owner hasn't washed hair for three days【bilibili】](https://www.bilibili.com/video/BV1bpjgzKEhd/)
